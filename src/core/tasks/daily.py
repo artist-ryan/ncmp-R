@@ -1,6 +1,8 @@
 from typing import Dict, Tuple
-from .base import BaseTask
+
 from ..signer import Signer
+from .base import BaseTask
+
 
 class DailyTask(BaseTask):
     def __init__(self, session, logger, config):

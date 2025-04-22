@@ -1,11 +1,16 @@
 {
-  "Cookie_MUSIC_U": "",
-  "Cookie___csrf": "",
-  "notify_email": "",
-  "email_password": "",
-  "smtp_server": "smtp.gmail.com",
-  "smtp_port": 465,
-  "wait_time_min": 15,
-  "wait_time_max": 20,
-  "score": 3
-} 
+    "Cookie_MUSIC_U": "您的MUSIC_U值",
+    "Cookie___csrf": "您的__csrf值",
+    "wait_time_min": 15,
+    "wait_time_max": 20,
+    "score": 3,
+    "notify_email": "您的邮箱地址",
+    "email_password": "您的邮箱密码或应用专用密码",
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 465,
+    "netease_phone": "您的网易云音乐手机号",
+    "netease_password": "您的网易云音乐密码明文(2选1)",
+    "netease_md5_password": "MD5加密后的密码，强烈建议使用该密码(2选1)",
+    "gh_token": "您的GitHub个人访问令牌",
+    "gh_repo": "您的GitHub仓库，格式为username/repo"
+}

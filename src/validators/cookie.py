@@ -1,6 +1,9 @@
 from typing import Tuple
+
 import requests
+
 from ..utils.logger import Logger
+
 
 class CookieValidator:
     def __init__(self, session: requests.Session, logger: Logger):

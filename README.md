@@ -14,6 +14,8 @@ ncmp(NetEase Cloud Music Partner/网易云音乐合伙人)
   - 支持 GitHub Actions 自动执行
 - 完善的通知机制
   - Cookie 失效自动发送邮件提醒
+- 一次配置持续使用
+  - 支持自动登录账号并刷新Cookie，基于[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
 ## 使用前准备
 
@@ -25,6 +27,59 @@ ncmp(NetEase Cloud Music Partner/网易云音乐合伙人)
 2. 打开浏览器开发者工具（F12）
 3. 切换到 Network（网络）选项卡
 4. 刷新页面，在请求中找到 cookie 中的 `MUSIC_U` 和 `__csrf` 值
+
+### Cookie自动刷新配置（可选）
+
+为了让Cookie自动刷新功能正常工作，您需要创建一个具有特定权限的GitHub Personal Access Token (PAT)。以下是详细步骤：
+
+#### 1. 创建GitHub Personal Access Token
+
+1. 登录您的 GitHub 账号
+2. 访问 [Token设置页面](https://github.com/settings/tokens)
+3. 点击"Generate new token" > "Fine-grained tokens" or "Generate new token (classic)"
+4. 在"Note"字段给您的Token起一个描述性名称，如"NCMP Cookie Refresh"
+5. 设置 Token 有效期
+
+#### 2. 选择正确的权限范围
+
+您只需要为 Token 配置最小必要的权限。
+如果使用 Fine-grained tokens (更精细的权限控制):
+
+1. 选择只对您的ncmp仓库有效
+2. 将 "secrets" 设为 "Read and write"
+
+如果使用 Generate new token (classic):
+
+**如果是公开仓库**，选择以下权限：
+
+- `repo` > `public_repo` (仅访问公开仓库)
+- `codespace` > `codespace:secrets`
+
+**如果是私有仓库**，选择以下权限：
+
+- `repo` (完整的仓库访问，包括私有仓库)
+- `codespace` > `codespace:secrets`
+
+#### 3. 保存Token
+
+1. 滚动到页面底部，点击"Generate token"
+2. **立即复制生成的token**（离开页面后将无法再次查看）
+3. 将复制的token添加到您fork的ncmp仓库的GitHub Secrets中，命名为`GH_TOKEN`
+
+#### 4. 添加额外的自动刷新Cookie所需Secrets
+
+在仓库的Secrets中添加以下内容：
+
+- `NETEASE_PHONE`: 您的网易云音乐账号手机号
+- 网易云音乐账号密码（2选1，强烈建议使用MD5加密密码）
+  - `NETEASE_PASSWORD`: 明文密码
+  - `NETEASE_MD5_PASSWORD`: MD5加密密码
+- `GH_TOKEN`: 刚才创建的GitHub Token
+
+#### 5. 启用自动刷新工作流
+
+- 确保仓库中`.github/workflows/refresh_cookie.yml`工作流已启用
+- 您可以在Actions页面手动运行"Cookie Refresh"工作流测试配置是否正确
 
 ### 配置邮箱通知（可选）
 
@@ -98,7 +153,7 @@ ncmp(NetEase Cloud Music Partner/网易云音乐合伙人)
 5. 运行测试脚本确认配置正确：
 
    ```bash
-   python tests/test_run.py
+   python tests/test_auto_score.py
    ```
 
 6. 运行主程序：
@@ -135,6 +190,7 @@ ncmp(NetEase Cloud Music Partner/网易云音乐合伙人)
 - 任务提交默认添加了 15-20 秒的等待时间，避免被检测异常
 - 建议使用 GitHub Actions 的定时任务功能，避免遗漏每日任务
 - 网易云音乐的 Cookie 两周左右就会过期，建议配置邮箱以便及时收到失效通知
+- Cookie 自动刷新使用了[该仓库](https://github.com/ACAne0320/ncma)的登陆API，如果害怕隐私泄露，可以自行fork该仓库并本地部署，将代码中刷新cookie的请求链接替换即可
 
 ## 声明
 
@@ -146,3 +202,12 @@ ncmp(NetEase Cloud Music Partner/网易云音乐合伙人)
 
 - [qinglong-sign](https://github.com/KotoriMinami/qinglong-sign)
 - [CloudMusicBot](https://github.com/C20C01/CloudMusicBot)
+- [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
+
+## 反馈
+
+使用过程中如果有任何问题或者建议，欢迎在[Issues](https://github.com/ACAne0320/ncmp/issues)中提出，或者联系我
+
+- 邮箱：[nyaashino@gmail.com](mailto:nyaashino@gmail.com)
+
+如果觉得这个项目对你有帮助，欢迎给个 Star 支持一下~

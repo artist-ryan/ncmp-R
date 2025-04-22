@@ -1,6 +1,6 @@
+import json
 import random
 import time
-import json
 from typing import Dict, List, Tuple
 
 from src.core.signer import Signer

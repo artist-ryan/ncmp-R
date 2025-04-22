@@ -1,9 +1,12 @@
-import requests
 from typing import Dict
-from ..utils.logger import Logger
+
+import requests
+
 from ..utils.config import Config
+from ..utils.logger import Logger
 from .tasks.daily import DailyTask
 from .tasks.extra import ExtraTask
+
 
 class MusicPartnerBot:
     def __init__(self, config: Config, logger: Logger, session: requests.Session):

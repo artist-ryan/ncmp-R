@@ -1,9 +1,11 @@
 import requests
+
+from src.core.bot import MusicPartnerBot
 from src.utils.config import Config
 from src.utils.logger import Logger
 from src.utils.notification import NotificationService
 from src.validators.cookie import CookieValidator
-from src.core.bot import MusicPartnerBot
+
 
 def main():
     try:

@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import Dict
+
 import requests
+
 from ...utils.logger import Logger
+
 
 class BaseTask(ABC):
     def __init__(self, session: requests.Session, logger: Logger, config: Dict):

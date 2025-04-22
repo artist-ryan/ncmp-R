@@ -1,15 +1,18 @@
 import base64
 import codecs
+import json
 import random
 import re
 import string
-import json
 import time
 from typing import Tuple
+
 import requests
 from Crypto.Cipher import AES
-from ..utils.logger import Logger
+
 from ..utils.config import Config
+from ..utils.logger import Logger
+
 
 class Signer:
     def __init__(self, session: requests.Session, task_id: str, logger: Logger, config: Config):

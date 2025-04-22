@@ -1,7 +1,8 @@
 import json
 import os
 import random
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
+
 
 class Config:
     def __init__(self):
@@ -38,6 +39,20 @@ class Config:
             config["wait_time_max"] = float(wait_max)
         if score := os.getenv("SCORE"):
             config["score"] = int(score)
+            
+        # 自动登录相关配置
+        if phone := os.getenv("NETEASE_PHONE"):
+            config["netease_phone"] = phone
+        if password := os.getenv("NETEASE_PASSWORD"):
+            config["netease_password"] = password
+        if md5_password := os.getenv("NETEASE_MD5_PASSWORD"):
+            config["netease_md5_password"] = md5_password
+            
+        # GitHub相关配置
+        if gh_token := os.getenv("GH_TOKEN"):
+            config["gh_token"] = gh_token
+        if gh_repo := os.getenv("GH_REPO"):
+            config["gh_repo"] = gh_repo
             
         config.setdefault("wait_time_min", 15)
         config.setdefault("wait_time_max", 20)

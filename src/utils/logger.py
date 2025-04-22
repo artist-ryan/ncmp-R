@@ -1,6 +1,7 @@
 import logging
 from typing import Optional
 
+
 class Logger:
     def __init__(self, log_level: Optional[int] = logging.DEBUG):
         # 配置日志格式
