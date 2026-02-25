@@ -1,0 +1,23 @@
+name: Keep Repo Alive
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'   # 每月1号自动运行一次
+  workflow_dispatch:      # 允许你手动点运行
+
+permissions:
+  contents: write
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create empty commit
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "keep-alive"
+          git push
